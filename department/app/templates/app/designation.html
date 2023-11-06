@@ -1,0 +1,376 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Bancapp Admin Portal</title>
+   <link href="favicon.ico" rel="icon">
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">  
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+  <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+  <!-- data tables css -->
+  <link rel="stylesheet" href="{% static 'app/css/datatables.min.css' %}"> 
+  <link rel="stylesheet" href="{% static 'app/css/style.css' %}">
+</head>
+
+<body>
+  <nav>
+    <div class="sidebar-top">
+      <span class="shrink-btn">
+        <img src="assets/images/arrow-left.png" width="14" height="24">
+      </span>
+      <img src="{% static 'app/images/logo-icon.svg' %}" alt="">
+      <h3 class="hide logoname">Reconsyde</h3>
+    </div>
+
+    <div class="search">
+      <!-- <i class='bx bx-search'></i>
+      <input type="text" class="hide" placeholder="Quick Search ..."> -->
+    </div>
+
+    <div class="sidebar-links">
+      <ul>
+        <!-- <div class="active-tab"></div> -->
+        <li class="tooltip-element" data-tooltip="0">
+          <a href="{% url 'organization' %}"  data-active="0">
+            <div class="icon">
+              
+              <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 16H14M9.0177 1.76403L2.23539 7.03916C1.78202 7.39178 1.55534 7.56809 1.39203 7.78889C1.24737 7.98447 1.1396 8.20481 1.07403 8.43908C1 8.70355 1 8.99073 1 9.56508V16.8C1 17.9201 1 18.4802 1.21799 18.908C1.40973 19.2843 1.71569 19.5903 2.09202 19.782C2.51984 20 3.07989 20 4.2 20H15.8C16.9201 20 17.4802 20 17.908 19.782C18.2843 19.5903 18.5903 19.2843 18.782 18.908C19 18.4802 19 17.9201 19 16.8V9.56508C19 8.99073 19 8.70355 18.926 8.43908C18.8604 8.20481 18.7526 7.98447 18.608 7.78889C18.4447 7.56809 18.218 7.39178 17.7646 7.03916L10.9823 1.76403C10.631 1.49078 10.4553 1.35415 10.2613 1.30163C10.0902 1.25529 9.9098 1.25529 9.73865 1.30163C9.54468 1.35415 9.36902 1.49078 9.0177 1.76403Z" stroke="#4B5768" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+             
+            </div>
+            <span class="link hide">Organization</span>
+          </a>
+        </li>
+        <li class="tooltip-element " data-tooltip="1">
+          <a href="{% url 'department' %}"  data-active="1">
+            <div class="icon">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 7H19M1 13H19M5.8 1H14.2C15.8802 1 16.7202 1 17.362 1.32698C17.9265 1.6146 18.3854 2.07354 18.673 2.63803C19 3.27976 19 4.11984 19 5.8V14.2C19 15.8802 19 16.7202 18.673 17.362C18.3854 17.9265 17.9265 18.3854 17.362 18.673C16.7202 19 15.8802 19 14.2 19H5.8C4.11984 19 3.27976 19 2.63803 18.673C2.07354 18.3854 1.6146 17.9265 1.32698 17.362C1 16.7202 1 15.8802 1 14.2V5.8C1 4.11984 1 3.27976 1.32698 2.63803C1.6146 2.07354 2.07354 1.6146 2.63803 1.32698C3.27976 1 4.11984 1 5.8 1Z" stroke="#4B5768" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                
+            </div>
+            <span class="link hide">Department</span>
+          </a>
+        </li>
+
+        <li class="tooltip-element activeli" data-tooltip="2">
+          <a href="{% url 'designation' %}" class="active" data-active="2">
+            <div class="icon">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 7H19M1 13H19M5.8 1H14.2C15.8802 1 16.7202 1 17.362 1.32698C17.9265 1.6146 18.3854 2.07354 18.673 2.63803C19 3.27976 19 4.11984 19 5.8V14.2C19 15.8802 19 16.7202 18.673 17.362C18.3854 17.9265 17.9265 18.3854 17.362 18.673C16.7202 19 15.8802 19 14.2 19H5.8C4.11984 19 3.27976 19 2.63803 18.673C2.07354 18.3854 1.6146 17.9265 1.32698 17.362C1 16.7202 1 15.8802 1 14.2V5.8C1 4.11984 1 3.27976 1.32698 2.63803C1.6146 2.07354 2.07354 1.6146 2.63803 1.32698C3.27976 1 4.11984 1 5.8 1Z" stroke="#4B5768" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>                
+            </div>
+            <span class="link hide">Designation</span>
+          </a>
+        </li>
+
+        <li class="tooltip-element" data-tooltip="3">
+          <a href="{% url 'module' %}" data-active="3">
+            <div class="icon">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 7H19M1 13H19M5.8 1H14.2C15.8802 1 16.7202 1 17.362 1.32698C17.9265 1.6146 18.3854 2.07354 18.673 2.63803C19 3.27976 19 4.11984 19 5.8V14.2C19 15.8802 19 16.7202 18.673 17.362C18.3854 17.9265 17.9265 18.3854 17.362 18.673C16.7202 19 15.8802 19 14.2 19H5.8C4.11984 19 3.27976 19 2.63803 18.673C2.07354 18.3854 1.6146 17.9265 1.32698 17.362C1 16.7202 1 15.8802 1 14.2V5.8C1 4.11984 1 3.27976 1.32698 2.63803C1.6146 2.07354 2.07354 1.6146 2.63803 1.32698C3.27976 1 4.11984 1 5.8 1Z" stroke="#4B5768" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                
+            </div>
+            <span class="link hide">Modules</span>
+          </a>
+        </li>
+
+        <li class="tooltip-element" data-tooltip="4">
+          <a href="{% url 'group_master' %}" data-active="4">
+            <div class="icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M17 11L21 7L17 3" stroke="#4B5768" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M21 7H9" stroke="#4B5768" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M7 21L3 17L7 13" stroke="#4B5768" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M15 17H3" stroke="#4B5768" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                </div>
+            <span class="link hide">Group Master</span>
+          </a>
+        </li>
+
+
+
+        <li class="tooltip-element" data-tooltip="5">
+          <a href="{% url 'permission' %}" data-active="5">
+            <div class="icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15.0505 9H5.5C4.11929 9 3 7.88071 3 6.5C3 5.11929 4.11929 4 5.5 4H15.0505M8.94949 20H18.5C19.8807 20 21 18.8807 21 17.5C21 16.1193 19.8807 15 18.5 15H8.94949M3 17.5C3 19.433 4.567 21 6.5 21C8.433 21 10 19.433 10 17.5C10 15.567 8.433 14 6.5 14C4.567 14 3 15.567 3 17.5ZM21 6.5C21 8.433 19.433 10 17.5 10C15.567 10 14 8.433 14 6.5C14 4.567 15.567 3 17.5 3C19.433 3 21 4.567 21 6.5Z" stroke="#4B5768" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                
+            </div>
+            <span class="link hide">Permissions</span>
+          </a>
+        </li> 
+        
+        <div class="tooltip">
+          <span class="">Organization</span>
+          <span class="">Department</span>
+          <span class="">Designation</span>
+          <span class="">Modules</span>
+          <span class="">Group Master</span>
+          <span class="">Permissions</span>
+         
+        </div>       
+      </ul>
+
+      
+    </div>
+
+    <div class="sidebar-footer">
+      <a href="google.com" class="log-out tooltip-element" data-tooltip="0">
+        <div class="icon icon-logout">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8.33337 14.1667L12.5 10L8.33337 5.83334" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12.5 10H2.5" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12.5 2.5H15.8333C16.2754 2.5 16.6993 2.67559 17.0118 2.98816C17.3244 3.30072 17.5 3.72464 17.5 4.16667V15.8333C17.5 16.2754 17.3244 16.6993 17.0118 17.0118C16.6993 17.3244 16.2754 17.5 15.8333 17.5H12.5" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            
+        </div>
+        <span class="link hide">Logout</span>
+      </a>
+      <a href="#" class="account tooltip-element" data-tooltip="1">
+        <img src="{% static 'app/images/user-img.png' %}" alt="">
+      </a>
+      <div class="admin-user tooltip-element" data-tooltip="2">
+        <div class="admin-profile hide">
+          <img src="{% static 'app/images/user-img.png' %}" alt="">
+          <div class="admin-info">
+            <h3>Pabitra Sen</h3>
+            <h5>View account</h5>
+          </div>
+        </div>        
+      </div>
+      <div class="tooltip">
+        <span class="show">Logout</span>
+        <span>Pabitra Sen</span>        
+      </div>
+    </div>
+  </nav>
+
+
+  <main>
+    <header class="sticky-top  d-flex justify-content-between align-items-center">
+        <div class="head-left-box">
+            <!-- <span class="arrow-icon"></span> -->
+            May 19, 2023
+        </div>
+        <div class="head-rht-box">
+          <div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="notific-icon"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                <a href="#" class="dropdown-item">
+                    <h6 class="fw-normal mb-0">Profile updated</h6>
+                    <small>15 minutes ago</small>
+                </a>
+                <hr class="dropdown-divider">
+                <a href="#" class="dropdown-item">
+                    <h6 class="fw-normal mb-0">New user added</h6>
+                    <small>15 minutes ago</small>
+                </a>
+                <hr class="dropdown-divider">
+                <a href="#" class="dropdown-item">
+                    <h6 class="fw-normal mb-0">Password changed</h6>
+                    <small>15 minutes ago</small>
+                </a>
+                <hr class="dropdown-divider">
+                <a href="#" class="dropdown-item text-center">See all notifications</a>
+            </div>
+        </div>
+          <div class="search">            
+            <input type="text"  placeholder="Search here ...">
+            <i class="bx-search-icon"></i>
+          </div>
+       
+        </div>
+       
+       
+    </header>
+    <div class="content-body">
+      <div class="row">
+        <div class="col-lg-12 heading-h3 mb-5">
+            <h3>Designation</h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 col-lg-12">
+          <div class="h-100">
+             
+              <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                  <li class="nav-item" role="presentation">
+                      <button class="nav-link active" id="pills-createrecord-tab" data-bs-toggle="pill" data-bs-target="#pills-createrecord" type="button" role="tab" aria-controls="pills-createrecord" aria-selected="true">Create </button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                      <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-record" type="button" role="tab" aria-controls="pills-record" aria-selected="false"> Records</button>
+                  </li>
+                 
+              </ul>
+              <div class="tab-content mt-4" id="pills-tabContent">
+                  <div class="tab-pane fade active show" id="pills-createrecord" role="tabpanel" aria-labelledby="pills-createrecord-tab">
+                  
+                    <form method="post" action="{% url 'designation_entry' %}">
+                      {% csrf_token %}
+
+                      <div class="row g-3">
+                        <div class="col-md-4 mb-3">
+                          <div class="form-group">
+                          <label for="designation-name" class="form-label">Designation Name</label>
+                          <input type="text" class="form-control" id="designation-name" name="designation-name"   required>
+                        </div>
+                        </div>
+                        
+                        
+                        
+                        <div class="col-md-4 mb-3">
+                          <div class="form-group">
+                          <label for="designation-description" class="form-label">Description</label>
+                          <input type="text" class="form-control" id="designation-description" name="designation-description" >
+                        </div>
+                        </div>
+                       
+                        <div class="col-md-4 mb-3 checkone">
+                          <div class="form-group">
+                            <label for="status" class="form-label bllel">&nbsp;</label>
+                            <label class="checkbxcont">
+                              </a><input type="checkbox" checked="checked"   name="designation_checkbox" id="designation_checkbox">
+                              <span class="checkmark"></span>Status
+                            </label>
+                        </div>
+                        </div>
+                        
+                        
+                        <div class="col-12">
+                          <div class="form-group">
+                              <button type="submit" id="sbtn1" class="btn btn-dark fw-bold btn-primary w-180 me-4">Submit</button> 
+                              <button type="submit" class="btn btn-dark fw-normal  btn-secondary w-180">Cancel</button>                          
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="tab-pane fade" id="pills-record" role="tabpanel" aria-labelledby="pills-record-tab">
+                    <form>
+                      <div class="row g-3">
+                        <div class="col-md-4 mb-3">
+                          <div class="form-group">
+                          <label for="designation-name" class="form-label">Designation Name</label>
+                          <input type="text" class="form-control" id="designation-name" name="designation-name"  required>
+                        </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                          <div class="form-group">
+                          <label for="designation-key" class="form-label">Description</label>
+                          <input type="text" class="form-control" id="designation-key" name="designation-key"  required>
+                        </div>
+                        </div>
+                        
+                        <div class="col-md-4 mb-3">
+                          <div class="form-group">
+                            <label class="form-label btnlebl">&nbsp;</label>
+                              <button type="submit" class="btn btn-dark fw-bold btn-primary w-180 me-4">Search</button> 
+                                                     
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <div class="card bxcard">
+                          <div class="card-body">
+                              <div class="table-responsive">
+                                  <table id="VendorAccountTable" class="tablebdr display table nowrap  table-hover dataTable">
+                                    <thead>
+                                      <tr>
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>Description</th>
+                                        <th>Status</th>
+                                        <th> Edit</th>
+                                        <th> Delete</th>
+                                      </tr>
+                                    </thead>
+                                    
+                                    <tbody id="tbody">
+                                      {% for data in designation_data %}
+                                      <tr id="account">
+                                        <td>{{data.id}}</td>
+                                        <td>{{data.designation_name}}</td>
+                                        <td>{{data.designation_description}}</td>
+                                        <td>{{data.designation_status}}</td>                                        
+                                        <td>
+                                          <a href="{% url 'designation_update' data.id %}">
+                                          <button class="btn-link m-0 btn-edit editicon" data-sid="account_id">
+                                              <i class="feather icon-edit"></i>
+                                            </button>
+                                          </a>
+                                            
+                                          
+                                         
+                                        </td>
+                                        <td>
+                                          <a href="{% url 'designation_delete' data.id %}">
+                                          <button class="btn-link m-0 btn-del deleteicon" data-sid="account-id" >
+                                            <i class="feather icon-trash-2"></i>
+                                          </button>
+                                        </a>
+                                        </td>
+                                      </tr>
+                                      {% endfor %}
+                                    </tbody>
+                                  </table>
+                                </div>
+                          </div>
+                      </div>
+                      </div>
+                    </div>
+                   
+                  </div>
+                  
+              </div>
+          </div>
+      </div>
+      </div>
+    </div>
+    
+    
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- datatable Js -->
+  <script src="{% static 'app/js/datatables.min.js' %}"></script>
+  <script src="{% static 'app/js/app.js' %}"></script>
+  <script>
+    $(document).ready(function () {
+        $("#VendorAccountTable").DataTable({
+          'pageLength':5,
+          'lengthMenu':[[3,5,10,25,-1],[3,5,10,25,"All"]],
+          'bInfo':true,
+          'searching':true,
+          'paging':true,
+          'pagingType':"full", 
+          "dom": '<"top"lf>t<"bottom"ipB><"clear">', //'l' for lengthmenu 'f' for filter(searchmenu) 't' for table 'i' for informations(entry per page) 'b' for buttons 
+          "buttons": [
+                'pdf',  // Button for exporting to PDF
+                'print', // Button for printing
+                'excel'  // Button for ExcelSheet
+            ],
+        });
+    });
+  </script>
+ 
+</body>
+
+</html>
